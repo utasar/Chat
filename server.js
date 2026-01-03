@@ -10,7 +10,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: "*",
+        origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : "*",
         methods: ["GET", "POST"]
     }
 });
@@ -65,7 +65,9 @@ const conversationHistory = new Map();
 
 // Initialize OpenAI client
 function initializeOpenAI() {
-    if (process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY !== 'your_openai_api_key_here') {
+    if (process.env.OPENAI_API_KEY && 
+        process.env.OPENAI_API_KEY.length > 20 && 
+        !process.env.OPENAI_API_KEY.includes('your_openai_api_key')) {
         try {
             const { OpenAI } = require('openai');
             openaiClient = new OpenAI({
@@ -119,7 +121,7 @@ async function getLekhandasResponse(userId, message) {
             }
 
             const response = await openaiClient.chat.completions.create({
-                model: 'gpt-3.5-turbo',
+                model: 'gpt-4o-mini', // Using latest efficient model
                 messages: history,
                 max_tokens: 150,
                 temperature: 0.8

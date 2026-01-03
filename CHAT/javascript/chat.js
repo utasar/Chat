@@ -1,5 +1,5 @@
-// Connect to Socket.io server
-const socket = io('http://localhost:3000');
+// Connect to Socket.io server (uses current host in production)
+const socket = io();
 
 // DOM Elements
 const chatBox = document.getElementById('chatBox');
@@ -345,23 +345,34 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
+// Reusable AudioContext for notifications
+let audioContext = null;
+
 function playNotificationSound() {
-    // Simple notification sound using Web Audio API
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    oscillator.frequency.value = 800;
-    oscillator.type = 'sine';
-    
-    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-    
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.1);
+    try {
+        // Create AudioContext once and reuse it
+        if (!audioContext) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.value = 800;
+        oscillator.type = 'sine';
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.1);
+    } catch (error) {
+        // Silently fail if AudioContext is not supported
+        console.log('Audio notification not available');
+    }
 }
 
 // Load user preferences
