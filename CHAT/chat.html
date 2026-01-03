@@ -7,39 +7,89 @@
     <title>LET'S CHAT</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-
 </head>
 <body>
     <div class="wrapper">
-        <section class ="chat-area">
+        <!-- Theme Toggle -->
+        <div class="theme-toggle">
+            <button id="themeToggle" title="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+
+        <section class="chat-area">
             <header>
-                <a href="#" class="back-icon"><i class="fas fa-arrow-left"></i></a>
-                    <img src="img.jpg"alt="">
-                    <div class="details">
-                        <span>Team Utsav</span>
-                        <p>Active now</p>
-                    </div>
+                <a href="users.html" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+                <img src="img.jpg" alt="Profile Picture" id="chatUserAvatar">
+                <div class="details">
+                    <span id="chatUserName">Team Utsav</span>
+                    <p id="chatUserStatus">Active now</p>
                 </div>
-             </header>
-             <div class="chat-box">
-                <div class="chat outgoing">
-                    <div class="details">
-                        <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore magnam maxime rem pariatur. Quam quod, ullam culpa alias tenetur odio eaque temporibus voluptates natus quae labore deleniti debitis dolor accusantium!</p>
-                    </div>
+                <button class="game-btn" id="gameBtn" title="Play Mini-Game">
+                    <i class="fas fa-gamepad"></i>
+                </button>
+            </header>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                <img src="img.jpg" alt="">
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
-                <div class="chat incoming">
-                    <img src="img.jpg" alt="">
-                    <div class="details">
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus ipsa, voluptas fugiat saepe cumque quisquam commodi tenetur nisi veniam repellat reprehenderit quo soluta sequi beatae, sed hic dolore quasi at?</p>
-                    </div>
-                     </div>
-             </div>
-             <form action="#" class="typing-area">
-                <input type="text" placeholder="Type a message here..">
-                <button><i class="fab fa-telegram-plane"></i></button>
-             </form>
-    </section>
+            </div>
+
+            <div class="chat-box" id="chatBox">
+                <!-- Messages will be added here dynamically -->
+            </div>
+
+            <form action="#" class="typing-area" id="messageForm">
+                <button type="button" class="emoji-btn" id="emojiBtn">
+                    <i class="far fa-smile"></i>
+                </button>
+                <input type="text" id="messageInput" placeholder="Type a message here..." autocomplete="off">
+                <button type="submit"><i class="fab fa-telegram-plane"></i></button>
+            </form>
+
+            <!-- Emoji Picker -->
+            <div class="emoji-picker" id="emojiPicker" style="display: none;">
+                <div class="emoji-grid">
+                    😀 😃 😄 😁 😆 😅 😂 🤣 😊 😇
+                    🙂 🙃 😉 😌 😍 🥰 😘 😗 😙 😚
+                    😋 😛 😝 😜 🤪 🤨 🧐 🤓 😎 🤩
+                    🥳 😏 😒 😞 😔 😟 😕 🙁 ☹️ 😣
+                    😖 😫 😩 🥺 😢 😭 😤 😠 😡 🤬
+                    👍 👎 👏 🙌 🤝 💪 🙏 ❤️ 💕 💖
+                    🎉 🎊 🎈 🎁 🏆 🎮 🎯 🎲 🎭 🎨
+                    ✨ 🌟 ⭐ 💫 🔥 💯 ✅ ❌ ⚠️ 📱
+                </div>
+            </div>
+        </section>
+
+        <!-- Mini-Game Modal -->
+        <div class="game-modal" id="gameModal" style="display: none;">
+            <div class="game-content">
+                <div class="game-header">
+                    <h3>Mini Games</h3>
+                    <button class="close-game" id="closeGame">×</button>
+                </div>
+                <div class="game-selection">
+                    <button class="game-option" data-game="tictactoe">
+                        <i class="fas fa-th"></i>
+                        <span>Tic Tac Toe</span>
+                    </button>
+                    <button class="game-option" data-game="guess">
+                        <i class="fas fa-question"></i>
+                        <span>Guess the Number</span>
+                    </button>
+                </div>
+                <div id="gameArea"></div>
+            </div>
+        </div>
     </div>
-    
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="javascript/chat.js"></script>
 </body>
 </html>
