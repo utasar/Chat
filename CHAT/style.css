@@ -1,4 +1,26 @@
-@import url('https://fonts.googlepis.com/css2?family=Poppins:wght@200');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+:root {
+    --primary-color: #6c5ce7;
+    --secondary-color: #a29bfe;
+    --accent-color: #fd79a8;
+    --text-color: #2d3436;
+    --bg-color: #f7f7f7;
+    --card-bg: #fff;
+    --incoming-msg: #fff;
+    --outgoing-msg: #6c5ce7;
+    --shadow: 0 0 128px 0 rgba(0,0,0,0.1), 0 32px 64px -48px rgba(0,0,0,0.5);
+}
+
+.dark-theme {
+    --text-color: #f7f7f7;
+    --bg-color: #1a1a2e;
+    --card-bg: #16213e;
+    --incoming-msg: #0f3460;
+    --outgoing-msg: #533483;
+    --shadow: 0 0 128px 0 rgba(0,0,0,0.5), 0 32px 64px -48px rgba(0,0,0,0.8);
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -6,20 +28,57 @@
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
 }
+
 body{
-display: flex;
-align-items: center;
-justify-content: center;
-min: height 100vh;
-background: #f7f7f7; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s ease, color 0.3s ease;
 }
 .wrapper{
-    background: #fff;
+    background: var(--card-bg);
     width: 450px;
-    border-radius: 16px;
-    box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
-                 0 32px 64px -48px rbga(0,0,0,0.5);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    position: relative;
+    transition: all 0.3s ease;
+}
 
+.wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(108, 92, 231, 0.2);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.theme-toggle button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+}
+
+.theme-toggle button:hover {
+    transform: rotate(180deg) scale(1.1);
+    box-shadow: 0 6px 20px rgba(108, 92, 231, 0.5);
 }
 /*signup form css code*/
 .form{
@@ -30,6 +89,10 @@ background: #f7f7f7;
     font-weight: 600;
     padding-bottom: 10px;
     border-bottom: 1px solid #e6e6e6;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 .form form{
     margin: 20px 0;
@@ -41,29 +104,30 @@ background: #f7f7f7;
     text-align: center;
     border-radius: 5px;
     margin-bottom: 10px;
-    border : 1px solid #f5c6cb;
+    border: 1px solid #f5c6cb;
     display: none;
 }
 .form form .name-details{
     display: flex;
 }
-form .name-details .feild:first-child{
+form .name-details .field:first-child{
     margin-right: 10px;
 }
-form .name-details .feild:last-child{
+form .name-details .field:last-child{
     margin-left: 10px;
 }
-.form form .feild{
+.form form .field{
     display:flex;
     position: relative;
     flex-direction: column;
     margin-bottom: 10px;
 }
-.form form .feild lable{
+.form form .field label{
     margin-bottom: 10px;
+    color: var(--text-color);
+    font-weight: 500;
 }
-
-.form form .feild input{
+.form form .field input{
     outline: none;
 }
 .form form .input input{
@@ -71,9 +135,18 @@ form .name-details .feild:last-child{
     width: 100%;
     font-size: 16px;
     padding: 0 10px;
-    border:1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    transition: all 0.3s ease;
 }
+
+.form form .input input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+}
+
 .form form .image input{
     font-size: 17px;
 }
@@ -82,12 +155,19 @@ form .name-details .feild:last-child{
     height: 45px;
     border: none;
     font-size: 17px;
-    font-weight: 400;
-    background: #333;
+    font-weight: 500;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: #fff;
-    border-radius: 5px;
-    cursor:pointer;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
+
+.form form .button input:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(108, 92, 231, 0.4);
+}
+
 .form form .field i{
     position: absolute;
     right: 15px;
@@ -96,8 +176,8 @@ form .name-details .feild:last-child{
     transform: translateY(-50%);
     cursor: pointer;
 }
-.form form .feild i.active::before{
-    color: #333;
+.form form .field i.active::before{
+    color: var(--primary-color);
     content: "\f070";
 }
 .form .link{
@@ -105,8 +185,12 @@ form .name-details .feild:last-child{
     margin: 10px 0;
     font-size: 17px;
 }
+.form .link a {
+    color: var(--primary-color);
+    font-weight: 500;
+}
 .form .link a:hover{
-text-decoration: underline;
+    text-decoration: underline;
 }
 /*Users area css code*/
 .users{
@@ -230,19 +314,66 @@ border-bottom: 1px solid #e6e6e6;
     display: flex;
     align-items: center;
     padding: 18px 30px;
+    border-bottom: 1px solid rgba(108, 92, 231, 0.1);
+    background: linear-gradient(135deg, rgba(108, 92, 231, 0.05), rgba(162, 155, 254, 0.05));
 }
 .chat-area header .back-icon{
     font-size: 18px;
-    color: #333;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
 }
+
+.chat-area header .back-icon:hover {
+    transform: translateX(-5px);
+}
+
 .chat-area header img{
     height: 45px;
     width: 45px;
     margin: 0 15px;
+    border: 2px solid var(--primary-color);
+    transition: all 0.3s ease;
 }
+
+.chat-area header img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.chat-area header .details {
+    flex: 1;
+}
+
 .chat-area header span{
     font-size: 17px;
-    font-weight: 500;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.chat-area header p {
+    font-size: 13px;
+    color: var(--primary-color);
+}
+
+.chat-area header .game-btn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+}
+
+.chat-area header .game-btn:hover {
+    transform: rotate(15deg) scale(1.1);
+    box-shadow: 0 5px 15px rgba(253, 121, 168, 0.4);
 }
 .chat-box{
     height: 500px;
@@ -314,4 +445,523 @@ border-bottom: 1px solid #e6e6e6;
     font-size: 19px;
     cursor: pointer;
     border-radius: 0 5px 5px 0;
+}
+
+/* Typing Indicator */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    padding: 10px 30px;
+    background: var(--bg-color);
+    animation: slideIn 0.3s ease;
+}
+
+.typing-indicator img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.typing-dots {
+    display: flex;
+    gap: 4px;
+    padding: 8px 12px;
+    background: var(--incoming-msg);
+    border-radius: 15px;
+}
+
+.typing-dots span {
+    width: 8px;
+    height: 8px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    animation: typing 1.4s infinite;
+}
+
+.typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+    30% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+/* Message Animations */
+.message-animate {
+    animation: messageSlide 0.3s ease;
+}
+
+@keyframes messageSlide {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Message Actions */
+.message-actions {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.chat:hover .message-actions {
+    opacity: 1;
+}
+
+.emoji-react {
+    background: rgba(108, 92, 231, 0.1);
+    border: none;
+    border-radius: 12px;
+    padding: 2px 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.emoji-react:hover {
+    background: rgba(108, 92, 231, 0.2);
+    transform: scale(1.1);
+}
+
+.reaction-popup {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    font-size: 24px;
+    animation: reactionPop 2s ease;
+}
+
+@keyframes reactionPop {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px);
+    }
+}
+
+/* Emoji Picker */
+.emoji-picker {
+    position: absolute;
+    bottom: 80px;
+    left: 30px;
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: var(--shadow);
+    z-index: 100;
+    animation: slideIn 0.3s ease;
+}
+
+.emoji-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.emoji-grid::-webkit-scrollbar {
+    width: 5px;
+}
+
+.emoji-grid::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+.emoji-btn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+}
+
+.emoji-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Mini-Game Modal */
+.game-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.game-content {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 25px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+    animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.game-header h3 {
+    color: var(--text-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.close-game {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close-game:hover {
+    transform: rotate(90deg);
+    background: #e74c3c;
+}
+
+.game-selection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.game-option {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 25px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.game-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(108, 92, 231, 0.4);
+}
+
+.game-option i {
+    font-size: 40px;
+}
+
+/* Tic Tac Toe */
+.tictactoe-game {
+    text-align: center;
+}
+
+.tictactoe-game h4 {
+    color: var(--text-color);
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.tictactoe-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px auto;
+    max-width: 300px;
+}
+
+.tictactoe-board .cell {
+    aspect-ratio: 1;
+    background: var(--bg-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tictactoe-board .cell:hover {
+    background: rgba(108, 92, 231, 0.1);
+    transform: scale(1.05);
+}
+
+.tictactoe-board .cell.X {
+    color: var(--primary-color);
+}
+
+.tictactoe-board .cell.O {
+    color: var(--accent-color);
+}
+
+.reset-game {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+.reset-game:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+/* Guess Game */
+.guess-game {
+    text-align: center;
+}
+
+.guess-game h4 {
+    color: var(--text-color);
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.guess-game p {
+    color: var(--text-color);
+    margin: 10px 0;
+}
+
+.guess-game input {
+    width: 100%;
+    max-width: 200px;
+    padding: 12px;
+    margin: 15px 0;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+.guess-game button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.guess-game button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+#guessResult {
+    font-weight: 600;
+    font-size: 18px;
+    margin: 15px 0;
+}
+
+/* Enhanced Typing Area */
+.typing-area {
+    padding: 18px 30px;
+    display: flex;
+    gap: 10px;
+    background: var(--card-bg);
+    border-top: 1px solid rgba(108, 92, 231, 0.1);
+}
+
+.typing-area input {
+    height: 45px;
+    flex: 1;
+    font-size: 16px;
+    border: 2px solid rgba(108, 92, 231, 0.2);
+    padding: 0 15px;
+    border-radius: 25px;
+    outline: none;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.typing-area input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+}
+
+.typing-area button[type="submit"] {
+    width: 45px;
+    height: 45px;
+    border: none;
+    outline: none;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.typing-area button[type="submit"]:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 5px 20px rgba(108, 92, 231, 0.4);
+}
+
+/* Outgoing and Incoming Messages */
+.chat-box .outgoing {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.outgoing .details {
+    max-width: calc(100% - 50px);
+}
+
+.outgoing .details p {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    border-radius: 18px 18px 0 18px;
+}
+
+.chat-box .incoming {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.chat-box .incoming img {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+}
+
+.incoming .details {
+    max-width: calc(100% - 60px);
+}
+
+.incoming .details p {
+    color: var(--text-color);
+    background: var(--incoming-msg);
+    border-radius: 18px 18px 18px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    .wrapper {
+        width: 100%;
+        border-radius: 0;
+    }
+    
+    .game-content {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .game-selection {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* AI Assistant Styling */
+.users-list a.ai-assistant {
+    background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(162, 155, 254, 0.1));
+    border: 2px solid rgba(108, 92, 231, 0.3);
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.users-list a.ai-assistant:hover {
+    background: linear-gradient(135deg, rgba(108, 92, 231, 0.2), rgba(162, 155, 254, 0.2));
+    transform: translateX(5px);
+    box-shadow: 0 5px 20px rgba(108, 92, 231, 0.3);
+}
+
+.users-list a.ai-assistant .details span {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
 }

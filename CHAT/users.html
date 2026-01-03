@@ -7,41 +7,61 @@
     <title>LET'S CHAT</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-
 </head>
 <body>
     <div class="wrapper">
-        <section class ="users">
+        <!-- Theme Toggle -->
+        <div class="theme-toggle">
+            <button id="themeToggle" title="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+        
+        <section class="users">
             <header>
                 <div class="content">
-                    <img src="img.jpg"alt="">
+                    <img src="img.jpg" alt="">
                     <div class="details">
                         <span>Team Utsav</span>
                         <p>Active now</p>
                     </div>
                 </div>
-                <a href="#" class="logout">Logout</a>
+                <a href="index.html" class="logout">Logout</a>
             </header>
             <div class="search">
-                <span class="text">Select an user to start chat</span>
-                <input type="text" placeholder="Enter your name to search...">
+                <span class="text">Select a user to start chat</span>
+                <input type="text" placeholder="Enter name to search...">
                 <button><i class="fas fa-search"></i></button>
             </div>
-            <div class="user-list">
-                <a href="#">
+            <div class="users-list">
+                <!-- AI Assistant Lekhandas -->
+                <a href="chat.html?user=lekhandas&name=Lekhandas (AI Assistant)" class="ai-assistant">
+                    <div class="content">
+                        <img src="img.jpg" alt="Lekhandas">
+                        <div class="details">
+                            <span>🤖 Lekhandas (AI Assistant)</span>
+                            <p>Your friendly AI companion - always available!</p>
+                        </div>
+                        <div class="status-dot"><i class="fas fa-circle"></i></div>
+                    </div>
+                </a>
+                
+                <!-- Sample Users -->
+                <a href="chat.html?user=user1&name=Team Utsav">
                     <div class="content">
                         <img src="img.jpg" alt="">
                         <div class="details">
                             <span>Team Utsav</span>
-                            <p>This is test message</p>
+                            <p>This is a test message</p>
                         </div>
                         <div class="status-dot"><i class="fas fa-circle"></i></div>
-
                     </div>
                 </a>
             </div>
-    </section>
+        </section>
     </div>
-    <script src="javascript\users.js"></script>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="javascript/users.js"></script>
 </body>
 </html>
